@@ -9,15 +9,22 @@
 </head>
 
 <body>
-    All the polls<br>
-    Hello this is the string i need to add: 05ede5ce<br>
 
-    {% for poll in polls %}
-    {{poll.id}} / {{poll.question}}<br>
+    <h1>All the <strong>polls</strong></h1><br>
+    <span>Hello this is the string i need to add: 05ede5ce</span><br>
+    <div>
+        <ul>
 
-
-
-    {% endfor %}
+            {% for poll in polls %}
+            
+            <li>{{poll.id}} / {{poll.question}} (<a href="polls/{{poll.id}}/update">update</a>/<a href="polls/{{poll.id}}/delete">delete</a></li><br>
+            
+            
+            
+            {% endfor %}
+        </ul>
+    </div>
+    <p>this is the <em>index</em> of the page and uh... </p>
 </body>
 
 </html>
