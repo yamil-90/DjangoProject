@@ -17,7 +17,9 @@
 
             {% for poll in polls %}
             
-            <li>{{poll.id}} / {{poll.question}} (<a href="polls/{{poll.id}}/update">update</a>/<a href="polls/{{poll.id}}/delete">delete</a></li>
+            <li>{{poll.id}} / <a href="{{poll.id}}"> {{poll.question}}</a> 
+                <!-- (<a href="polls/{{poll.id}}/update">update</a>/<a href="polls/{{poll.id}}/delete">delete</a> -->
+            </li>
             
             
             
