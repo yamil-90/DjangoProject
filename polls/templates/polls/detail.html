@@ -1,5 +1,8 @@
 Detail of poll<br>
 
-ID: {{ poll.id }}<br>
-QUESTION: {{ poll.question }}<br>
-DATE: {{ poll.pub_date }}<br>
+ID: {{ question.id }}<br>
+QUESTION: {{ question.question }}<br>
+DATE: {{ question.pub_date }}<br>
+
+
+{% for choice in question %}

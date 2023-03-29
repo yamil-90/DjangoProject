@@ -15,9 +15,9 @@
     <div>
         <ul>
 
-            {% for poll in polls %}
+            {% for question in questions %}
             
-            <li>{{poll.id}} / <a href="{{poll.id}}"> {{poll.question}}</a> 
+            <li>{{poll.id}} / <a href="{{question.id}}"> {{question.question_text}}</a> 
                 <!-- (<a href="polls/{{poll.id}}/update">update</a>/<a href="polls/{{poll.id}}/delete">delete</a> -->
             </li>
             
