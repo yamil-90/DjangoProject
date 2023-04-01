@@ -1,8 +1,14 @@
-Detail of poll<br>
+<h2>Detail of poll</h2><br>
 
 ID: {{ question.id }}<br>
-QUESTION: {{ question.question }}<br>
+QUESTION: {{ question.question_text }}<br>
 DATE: {{ question.pub_date }}<br>
 
+<h3>Choices</h3>
+<ul>
+    {% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }} - {{ choice.votes }} votes</li>
+    {% endfor %}
+</ul>
 
-{% for choice in question %}
+

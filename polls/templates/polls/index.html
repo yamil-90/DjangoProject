@@ -14,16 +14,19 @@
     <span>Hello this is the string i need to add: 05ede5ce</span><br>
     <div>
         <ul>
+            {% if latest_questions_list %}
+            {% for question in latest_questions_list %}
 
-            {% for question in questions %}
-            
-            <li>{{poll.id}} / <a href="{{question.id}}"> {{question.question_text}}</a> 
+            <li>ID: {{question.id}} / <a href="{% url 'polls:detail' question.id %}"> {{question.question_text}}</a>
                 <!-- (<a href="polls/{{poll.id}}/update">update</a>/<a href="polls/{{poll.id}}/delete">delete</a> -->
             </li>
-            
-            
-            
+
+
+
             {% endfor %}
+            {% else %}
+            <li>No polls are available.</li>
+            {% endif %}
         </ul>
     </div>
     <p>this is the <em>index</em> of the page and uh... </p>
