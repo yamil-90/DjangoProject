@@ -1,0 +1,11 @@
+{% extends "cats/layout.html" %}
+
+{% block content %}
+
+<h1>All the <strong>cats</strong></h1><br>
+
+{% for cat in cats %}
+    <a href="/cats/{{ cat.id }}">{{ cat.name }}</a><br>
+{% endfor %}
+
+{% endblock %}
