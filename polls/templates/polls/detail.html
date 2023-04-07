@@ -18,7 +18,7 @@ DATE: {{ question.pub_date }}<br>
         {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
         {% for choice in question.choice_set.all %}
         <input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}">
-        <label for="choice{{forloop.counter}}">{{ choice.choice_text }} {{choice.votes}} Votes</label><br>
+        <label for="choice{{forloop.counter}}">{{ choice.choice_text }}</label> {{choice.votes}} Votes<br>
         {% endfor %}
     </fieldset>
     <input type="submit" value="Vote">
