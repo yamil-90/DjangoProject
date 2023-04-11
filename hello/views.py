@@ -4,7 +4,6 @@ from django.http import HttpResponse
 # Create your views here.
 
 def index(request):
-    print("session ", request.session['num_visits'])
     count = request.session.get('num_visits', 0) + 1
     request.session['num_visits'] = count
     response = HttpResponse("Hello, world. You're at the hello index.<br>view count="+str(count))
