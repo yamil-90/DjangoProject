@@ -20,6 +20,11 @@ class ResultsView(DetailView):
     model = Question
     template_name = 'polls/results.html'
 
+# class Vote(DetailView):
+#     model = Question
+#     def post(self):
+#         try:
+#             selected_choice = self.model.choice_set.get(pk=request.POST['choice'])
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
@@ -40,3 +45,10 @@ def vote(request, question_id):
 
 def owner(request):
     return HttpResponse("Hello, world. 05ede5ce is the polls index.")
+
+def cookie(request):
+    print(request.COOKIES)
+    response = HttpResponse("this is the cookies page where we set some cookies")
+    response.set_cookie('cookie', 'value of the cookie, if no max_age is set then it wont expire until the browser is closed')
+    response.set_cookie('temporal_cookie', 'value of the temporal cookie 2', max_age=60)
+    return response
