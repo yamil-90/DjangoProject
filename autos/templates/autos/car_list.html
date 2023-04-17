@@ -16,7 +16,7 @@
 {% else %}
 <h3>there are no cars :(</h3>
 {% endif %}
-<h3>Makes (<a href="lookup">see all</a> )</h3>
+<h3>Makes (<a href="lookup">View makes</a> )</h3>
 {% for make in makes_list %}
 <h4>{{make.name}} (<a href="lookup/{{make.id}}/update">update</a>/
     <a href="lookup/{{make.id}}/delete">delete</a>)</h4>
