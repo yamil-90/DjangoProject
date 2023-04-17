@@ -2,8 +2,8 @@
 
 {% for make in object_list %}
 <h4>{{make.name}} 
-    <a href="lookup/{{make.id}}/update">Update</a>/
-    <a href="lookup/{{make.id}}/delete">Delete</a></h4>
+    (<a href="{% url 'autos:make_update' make.id %}">Update</a> |
+    <a href="{% url 'autos:make_delete' make.id %}">Delete</a>)
 {% endfor %}
 
-<a href="lookup/create" >create new Make</a>
+<a href="{% url 'autos:make_create' make.id %}" >create new Make</a>

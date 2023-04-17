@@ -1,3 +1,7 @@
+{% extends "base_bootstrap.html" %}
+
+{% block content %}
+
 <h1>
     Make create
 </h1>
@@ -10,3 +14,5 @@
     <input type="submit" onclick="window.location='{% url 'autos:make_list' %}' ; return false;" value="Cancel">
 </form>
     <a href="/autos" value="save" >go back</a>
+
+{% endblock %}
