@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views import View
+from django.views.generic import ListView
 from .models import Cat
 
 # Create your views here.
 
-class CatListViews(View):
+class CatListViews(ListView):
     model = Cat
+    template_name = 'cats/index.html'
 
 def detail(request, cat_id):
     return HttpResponse("detail of cat %s" % cat_id)

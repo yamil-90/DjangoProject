@@ -1,0 +1,14 @@
+<h1>
+    car create
+</h1>
+<ul>
+    <li>nickname {{ object.nickname }}</li>
+    <li>mileage {{object.mileage}}</li>
+    <li>make {{object.make.name}}</li>
+</ul>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit"  />
+</form>
+    <a href="/autos" value="save" >go back</a>

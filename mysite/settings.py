@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'cats.apps.CatsConfig',
     'home.apps.HomeConfig',
     'hello.apps.HelloConfig',
+    'autos.apps.AutosConfig'
 ]
 
 MIDDLEWARE = [

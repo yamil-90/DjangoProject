@@ -3,7 +3,11 @@
 {% block content %}
 
 <h1>All the <strong>cats</strong></h1><br>
-
+{% if cats %}
+    <p>Here are all the cats:</p>
+{% else %}
+    <p>There are no cats. Would you like to <a href="/cats/create">add one</a>?</p>
+{% endif %}
 {% for cat in cats %}
     <a href="/cats/{{ cat.id }}">{{ cat.name }}</a><br>
 {% endfor %}
