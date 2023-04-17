@@ -1,3 +1,7 @@
+{% extends "base_bootstrap.html" %}
+
+{% block content %}
+
 <h1>autos list</h1>
 
 {% for auto in object_list %}
@@ -17,4 +21,7 @@
 <h4>{{make.name}} (<a href="lookup/{{make.id}}/update">update</a>/
     <a href="lookup/{{make.id}}/delete">delete</a>)</h4>
 {% endfor %}
-<a href="lookup/create" >create new Make</a>
+<a href="lookup/create" >Add a make</a>
+
+
+{% endblock %}
