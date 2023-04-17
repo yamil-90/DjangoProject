@@ -1,0 +1,9 @@
+<h1>Makes list</h1>
+
+{% for make in object_list %}
+<h4>{{make.name}} 
+    <a href="lookup/{{make.id}}/update">update</a>/
+    <a href="lookup/{{make.id}}/delete">delete</a></h4>
+{% endfor %}
+
+<a href="lookup/create" >create new Make</a>
