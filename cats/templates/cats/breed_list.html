@@ -1,0 +1,9 @@
+<h1>breeds list</h1>
+
+{% for make in object_list %}
+<h4>{{make.name}}
+    (<a href="{% url 'cats:breed_update' make.id %}">Update</a> |
+    <a href="{% url 'cats:breed_delete' make.id %}">Delete</a>)
+    {% endfor %}
+
+    <br><a href="{% url 'cats:breed_create' %}">create new Breed</a>

@@ -1,0 +1,18 @@
+{% extends "base_bootstrap.html" %}
+
+{% block content %}
+
+<h1>
+    breed create
+</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+    <input type="submit" value="Submit">
+    <input type="submit" onclick="window.location='{% url 'cats:breed_list' %}' ; return false;" value="Cancel">
+</form>
+    <a href="{% url 'cats:cats_list' %}" value="save" >go back</a>
+
+{% endblock %}

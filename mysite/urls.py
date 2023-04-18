@@ -11,7 +11,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')), 
     path('polls/', include('polls.urls'), name='polls'),
-    path('cats/', include('cats.urls')),
+    path('cats/', include('cats.urls', namespace='cats')),
     path('hello/', include('hello.urls')),
     path('autos/', include('autos.urls', namespace='autos')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
