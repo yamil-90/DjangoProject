@@ -1,10 +1,11 @@
 from .models import Cat, Breed
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, CreateView, UpdateView, DeleteView, ListView
 from django.shortcuts import render
 
 # Create your views here.
 
-class CatList(ListView):
+class CatList(LoginRequiredMixin, ListView):
     model = Cat
     def get(self, request):
         cats_list = Cat.objects.all()
@@ -15,40 +16,40 @@ class CatList(ListView):
         }
         return render(request, 'cats/cat_list.html', context)
 
-class CatDetail(DetailView):
+class CatDetail(LoginRequiredMixin, DetailView):
     model = Cat
 
-class CatCreate(CreateView):
-    model = Cat
-    fields = '__all__'
-    success_url = '/cats/'
-
-class CatUpdate(UpdateView):
+class CatCreate(LoginRequiredMixin, CreateView):
     model = Cat
     fields = '__all__'
     success_url = '/cats/'
 
-class CatDelete(DeleteView):
+class CatUpdate(LoginRequiredMixin, UpdateView):
+    model = Cat
+    fields = '__all__'
+    success_url = '/cats/'
+
+class CatDelete(LoginRequiredMixin, DeleteView):
     model = Cat
     success_url = '/cats/'
 
-class BreedList(ListView):
+class BreedList(LoginRequiredMixin, ListView):
     model = Breed
 
-class BreedDetail(DetailView):
+class BreedDetail(LoginRequiredMixin, DetailView):
     model = Breed
 
-class BreedCreate(CreateView):
+class BreedCreate(LoginRequiredMixin, CreateView):
     model = Breed
     fields = '__all__'
     success_url = '/cats/lookup/'
 
-class BreedUpdate(UpdateView):
+class BreedUpdate(LoginRequiredMixin, UpdateView):
     model = Breed
     fields = '__all__'
     success_url = '/cats/lookup/'
 
-class BreedDelete(DeleteView):
+class BreedDelete(LoginRequiredMixin, DeleteView):
     model = Breed
     success_url = '/cats/lookup/'
 
