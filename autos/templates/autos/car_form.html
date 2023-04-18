@@ -5,6 +5,7 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit"  />
+    <input type="submit"  value="Submit"/>
+    <input type="submit" onclick="window.location='{% url 'autos:cars_list' %}' ; return false;" value="Cancel">
 </form>
     <a href="/autos" value="save" >go back</a>
