@@ -1,9 +1,13 @@
+{% extends "base_menu.html" %}
+
+{% block content %}
 <h1>
     ad details
 </h1>
 <ul>
     <li>title {{ object.title }}</li>
-    <li>price {{object.price}}</li>
-    <li>owner {{object.owner.username}}</li>
+    <li>Price {{object.price}}</li>
+    <li>Text {{object.text}}</li>
 </ul>
 <a href="{% url 'ads:ads_list' %}" >go back</a>
+{% endblock %}
