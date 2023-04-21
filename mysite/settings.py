@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'rest_framework', 
     'social_django',  
     'taggit',
-    "debug_toolbar",
+    # "debug_toolbar",
 
 ]
 
@@ -69,7 +69,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    # "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 INTERNAL_IPS = [
