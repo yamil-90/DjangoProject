@@ -1,3 +1,7 @@
+{% extends "base_menu.html" %}
+{% block content %}
+<h1>Welcome to {{ settings.APP_NAME }}{{ APP_NAME }}</h1>
+
 <ul>
     <li>
         <p><a href="polls">go to Polls Application</a></p>
@@ -15,3 +19,5 @@
         <p><a href="admin">go to admin page</a></p>
     </li>
 </ul>
+
+{% endblock %}

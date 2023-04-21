@@ -3,7 +3,7 @@
 {% block content %}
 
 <h1>
-    cat create
+    ad create
 </h1>
 
 {% load crispy_forms_tags %}
@@ -11,8 +11,8 @@
     {% csrf_token %}
     {{ form|crispy }}
     <input type="submit" value="Submit" />
-    <input type="submit" onclick="window.location='{% url 'cats:cats_list' %}' ; return false;" value="Cancel">
+    <input type="submit" onclick="window.location='{% url 'ads:ads_list' %}' ; return false;" value="Cancel">
 </form>
-<a href="{% url 'cats:cats_list' %}" value="save">go back</a>
+<a href="{% url 'ads:ads_list' %}" value="save">go back</a>
 
 {% endblock %}

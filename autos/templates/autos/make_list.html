@@ -1,3 +1,7 @@
+{% extends "base_menu.html" %}
+
+{% block content %}
+
 <h1>Makes list</h1>
 
 {% for make in object_list %}
@@ -7,3 +11,5 @@
 {% endfor %}
 
 <a href="{% url 'autos:make_create' %}" >create new Make</a>
+
+{% endblock %}

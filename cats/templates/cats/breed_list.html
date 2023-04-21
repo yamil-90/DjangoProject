@@ -1,3 +1,6 @@
+{% extends "base_menu.html" %}
+
+{% block content %}
 <h1>breeds list</h1>
 
 {% for make in object_list %}
@@ -7,3 +10,5 @@
     {% endfor %}
 
     <br><a href="{% url 'cats:breed_create' %}">create new Breed</a>
+
+    {% endblock %}

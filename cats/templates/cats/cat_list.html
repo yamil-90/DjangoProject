@@ -1,27 +1,29 @@
-{% extends "base_bootstrap.html" %}
+{% extends "base_menu.html" %}
 
 {% block content %}
 
 <h1>cats list</h1>
 
 {% for cat in object_list %}
-<h4>{{cat.nickname}} 
+<h4>{{cat.nickname}}
     <a href="{% url 'cats:cats_update' cat.id %}">Update</a>/
-    <a href="{% url 'cats:cats_delete' cat.id %}">Delete</a></h4>
+    <a href="{% url 'cats:cats_delete' cat.id %}">Delete</a>
+</h4>
 {% endfor %}
 
 
 {% if breeds_list|length > 0 %}
-<a href="{% url 'cats:cats_create' %}" >Add a cat</a>
+<a href="{% url 'cats:cats_create' %}">Add a cat</a>
 {% else %}
 <h3>there are no cats :(</h3>
 {% endif %}
 <h3>Breeds (<a href="lookup">View breeds</a> )</h3>
 {% for breed in breeds_list %}
 <h4>{{breed.name}} (<a href="{% url 'cats:breed_update' breed.id %}">update</a>/
-    <a href="{% url 'cats:breed_delete' breed.id %}">delete</a>)</h4>
+    <a href="{% url 'cats:breed_delete' breed.id %}">delete</a>)
+</h4>
 {% endfor %}
-<a href="{% url 'cats:breed_create' %}" >Add a breed</a>
+<a href="{% url 'cats:breed_create' %}">Add a breed</a>
 
 
 {% endblock %}

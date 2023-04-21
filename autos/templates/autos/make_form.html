@@ -1,4 +1,4 @@
-{% extends "base_bootstrap.html" %}
+{% extends "base_menu.html" %}
 
 {% block content %}
 
@@ -9,10 +9,10 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    
+
     <input type="submit" value="Submit">
     <input type="submit" onclick="window.location='{% url 'autos:make_list' %}' ; return false;" value="Cancel">
 </form>
-    <a href="/autos" value="save" >go back</a>
+<a href="/autos" value="save">go back</a>
 
 {% endblock %}

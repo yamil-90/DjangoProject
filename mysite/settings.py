@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,6 +30,8 @@ ALLOWED_HOSTS = ['*']
 
 LOGIN_REDIRECT_URL = '/hello'
 
+APP_NAME = 'Yamil\'s Site'
+
 
 # Application definition
 
@@ -39,11 +42,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # apps section
     'polls.apps.PollsConfig',
     'cats.apps.CatsConfig',
     'home.apps.HomeConfig',
     'hello.apps.HelloConfig',
-    'autos.apps.AutosConfig'
+    'autos.apps.AutosConfig',
+    'ads.apps.AdsConfig',
+
+    # Third party apps
+    'django_extensions', 
+    'crispy_forms',  
+    'rest_framework', 
+    'social_django',  
+    'taggit',
+    "debug_toolbar",
+
 ]
 
 MIDDLEWARE = [
@@ -54,6 +69,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+]
+
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -83,10 +105,19 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'sqlite': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ads_database',
+        'USER': 'yamil_django',
+        'PASSWORD': 'password123!',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }       
+
 }
 
 
@@ -128,9 +159,11 @@ STATIC_ROOT = ''
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "mysite/site/css/",
-]
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'home/static'),] # new
+# STATICFILES_DIRS = [
+#     BASE_DIR / "mysite/site/css/",
+# ]
 
 
 

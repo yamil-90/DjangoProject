@@ -1,0 +1,9 @@
+<h1>
+    ad details
+</h1>
+<ul>
+    <li>title {{ object.title }}</li>
+    <li>price {{object.price}}</li>
+    <li>owner {{object.owner.username}}</li>
+</ul>
+<a href="{% url 'ads:ads_list' %}" >go back</a>

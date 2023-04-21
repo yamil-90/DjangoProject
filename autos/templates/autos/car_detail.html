@@ -1,3 +1,6 @@
+{% extends "base_menu.html" %}
+
+{% block content %}
 <h1>
     car details
 </h1>
@@ -7,3 +10,4 @@
     <li>make {{object.make.name}}</li>
 </ul>
 <a href="/autos" >go back</a>
+{% endblock %}

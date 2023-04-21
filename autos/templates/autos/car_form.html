@@ -1,3 +1,6 @@
+{% extends "base_menu.html" %}
+
+{% block content %}
 <h1>
     car create
 </h1>
@@ -9,3 +12,4 @@
     <input type="submit" onclick="window.location='{% url 'autos:cars_list' %}' ; return false;" value="Cancel">
 </form>
     <a href="/autos" value="save" >go back</a>
+{% endblock %}

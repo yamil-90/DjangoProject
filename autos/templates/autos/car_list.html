@@ -1,27 +1,29 @@
-{% extends "base_bootstrap.html" %}
+{% extends "base_menu.html" %}
 
 {% block content %}
 
 <h1>autos list</h1>
 
 {% for auto in object_list %}
-<h4>{{auto.nickname}} 
+<h4>{{auto.nickname}}
     <a href="{% url 'autos:cars_update' auto.id %}">Update</a>/
-    <a href="{% url 'autos:cars_delete' auto.id %}">Delete</a></h4>
+    <a href="{% url 'autos:cars_delete' auto.id %}">Delete</a>
+</h4>
 {% endfor %}
 
 
 {% if makes_list|length > 0 %}
-<a href="{% url 'autos:cars_create' %}" >Add an auto</a>
+<a href="{% url 'autos:cars_create' %}">Add an auto</a>
 {% else %}
 <h3>there are no cars :(</h3>
 {% endif %}
 <h3>Makes (<a href="lookup">View makes</a> )</h3>
 {% for make in makes_list %}
 <h4>{{make.name}} (<a href="{% url 'autos:make_update' make.id %}">update</a>/
-    <a href="{% url 'autos:make_delete' make.id %}">delete</a>)</h4>
+    <a href="{% url 'autos:make_delete' make.id %}">delete</a>)
+</h4>
 {% endfor %}
-<a href="{% url 'autos:make_create' %}" >Add a make</a>
+<a href="{% url 'autos:make_create' %}">Add a make</a>
 
 
 {% endblock %}
