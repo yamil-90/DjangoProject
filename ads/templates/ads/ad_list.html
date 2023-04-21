@@ -7,9 +7,9 @@
 <h1>ad list</h1>
 
 {% for ad in object_list %}
-<h4>{{ad.title}} 
-    <a href="{% url 'ads:ads_update' ad.id %}">Update</a>/
-    <a href="{% url 'ads:ads_delete' ad.id %}">Delete</a></h4>
+<h4><a href="{% url 'ads:ads_detail' ad.id %}" >{{ad.title}}</a>
+     (<a href="{% url 'ads:ads_update' ad.id %}">Update</a>/
+    <a href="{% url 'ads:ads_delete' ad.id %}">Delete</a>)</h4>
 {% endfor %}
 
 {% endblock %}
