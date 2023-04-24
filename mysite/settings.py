@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'rest_framework', 
     'social_django',  
     'taggit',
+    'django.contrib.humanize'
     # "debug_toolbar",
 
 ]
