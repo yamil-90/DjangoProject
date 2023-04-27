@@ -3,49 +3,49 @@
 {% load humanize %} <!-- https://docs.djangoproject.com/en/3.0/ref/contrib/humanize -->
 {% block head %}
 <style>
-.overlay{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 10;
-  display: none;
-  background-color: rgba(0,0,0,0.5); /*dim the background*/
-}
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        display: none;
+        background-color: rgba(0, 0, 0, 0.5);
+        /*dim the background*/
+    }
 </style>
 {% endblock %}
 {% block content %}
 {% if object.content_type %}
 <div id="overlay" class="overlay" style="text-align: center;"
-   onclick="document.getElementById('overlay').style.display = 'none';" >
-<img style="width:90%;margin-top: 50px; border:3px solid black;" src="{% url 'ads:ads_picture' object.id %}">
+    onclick="document.getElementById('overlay').style.display = 'none';">
+    <img style="height:90%;margin-top: 50px; border:3px solid black;" src="{% url 'ads:ads_picture' object.id %}">
 </div>
 {% endif %}
-<span style="float: right;">
-({{ object.updated_at|naturaltime }})
-{% if object.owner == user %}
-<a href="{% url 'ads:ads_update' ad.id %}"><i class="fa fa-pencil"></i></a>
-<a href="{% url 'ads:ads_delete' ad.id %}"><i class="fa fa-trash"></i></a>
-{% endif %}
+<span style="float: right; font-size: x-large">
+    last updated ({{ object.updated_at|naturaltime }})
+    {% if object.owner == user %}
+    <a href="{% url 'ads:ads_update' ad.id %}"><i class="fa fa-pencil"></i></a>
+    <a href="{% url 'ads:ads_delete' ad.id %}"><i class="fa fa-trash"></i></a>
+    {% endif %}
 </span>
 <h1>{{ object.title }}</h1>
 {% if object.content_type %}
-<img style="float:right; max-width:50%;" src="{% url 'ads:ads_picture' ad.id %}"
+<img style="float:right; max-width:50%;" src="{% url 'ads:ads_picture' object.id %}"
     onclick="document.getElementById('overlay').style.display = 'block';">
 {% endif %}
-<p>
-test: {{ object.text }}
-</p>
-<p>
-    price: {{ object.price|floatformat:2 }}
-</p>
-<p>
-    owner: {{ object.owner }}
-<p>
-<p>
-    content_type: {{ object.content_type }}
-</p>
-<a href="{% url 'ads:ads_list' %}">All ads</a>
+<div style="font-size: large;">
+    <p>
+        text: {{ object.text }}
+    </p>
+    <p>
+        price: ${{ object.price|floatformat:2 }}
+    </p>
+    <p>
+        owner: {{ object.owner }}
+    </p>
+        <a href="{% url 'ads:ads_list' %}">All ads</a>
+</div>
 </p>
 {% endblock %}

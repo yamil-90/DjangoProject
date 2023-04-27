@@ -8,7 +8,7 @@ import os
 urlpatterns = [
     path('', TemplateView.as_view(template_name='home/main.html'), name='home'),
     path('css', views.css, name="css"),
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
     path('accounts/', include('django.contrib.auth.urls')), 
     path('polls/', include('polls.urls'), name='polls'),
     path('cats/', include('cats.urls', namespace='cats')),
