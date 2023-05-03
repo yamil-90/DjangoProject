@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, UpdateView
-from .models import Ad
+from .models import Ad, Comment
 from .owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateView, OwnerDeleteView
-from .forms import CreateForm
+from .forms import CreateForm, CommentForm
 from django.urls import reverse_lazy
 from django.http import HttpResponse
 
@@ -15,6 +15,14 @@ class AdsList(OwnerListView):
 class AdDetailView(OwnerDetailView):
     model = Ad
     success_url=reverse_lazy('ads:ads_list')
+    template_name = 'ads/ad_detail.html'
+
+    def get(self, request, pk):
+        ad = Ad.objects.get(id=pk)
+        comments = Comment.objects.filter(ad=ad).order_by('-updated_at')
+        comment_form = CommentForm()
+        context = { 'object': ad, 'comments': comments, 'comment_form': comment_form }
+        return render(request, self.template_name, context)
 
 class AdCreateView(LoginRequiredMixin, CreateView):
     model = Ad
@@ -65,6 +73,21 @@ class AdUpdateView(LoginRequiredMixin, UpdateView):
 class AdDeleteView(OwnerDeleteView):
     model = Ad
     success_url=reverse_lazy('ads:ads_list')
+
+class CommentCreateView(LoginRequiredMixin, CreateView):
+    def post(self, request, pk):
+        ad = get_object_or_404(Ad, id= pk)
+        comment = Comment(text=request.POST['comment'], owner=request.user, ad=ad)
+        comment.save()
+        return redirect(reverse_lazy('ads:ads_detail', args=[pk]))
+    
+class CommentDeleteView(OwnerDeleteView):
+    model = Comment
+
+    def get_success_url(self):
+        ad = self.object.ad
+        return reverse_lazy('ads:ads_detail', args=[ad.id])
+
 
 def stream_file(request, pk):
     ad = get_object_or_404(Ad, id=pk)

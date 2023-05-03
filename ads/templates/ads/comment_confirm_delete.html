@@ -1,0 +1,12 @@
+{% extends "base_menu.html" %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<form method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ object.text }}"?</p>
+    {{ form|crispy }}
+    <input type="submit" value="Yes, delete.">
+    <a href="{% url 'ads:ads_detail' comment.ads.id %}" class="btn btn-secondary">Cancel</a>
+</form>
+
+{% endblock %}
