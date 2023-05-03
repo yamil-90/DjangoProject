@@ -4,7 +4,7 @@ from django.views.generic import CreateView, UpdateView
 from .models import Ad, Comment
 from .owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateView, OwnerDeleteView
 from .forms import CreateForm, CommentForm
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.http import HttpResponse
 
 # Create your views here.
@@ -86,7 +86,7 @@ class CommentDeleteView(OwnerDeleteView):
 
     def get_success_url(self):
         ad = self.object.ad
-        return reverse_lazy('ads:ads_detail', args=[ad.id])
+        return reverse('ads:ads_detail', args=[ad.id])
 
 
 def stream_file(request, pk):

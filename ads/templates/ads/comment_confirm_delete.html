@@ -6,7 +6,8 @@
     <p>Are you sure you want to delete "{{ object.text }}"?</p>
     {{ form|crispy }}
     <input type="submit" value="Yes, delete.">
-    <a href="{% url 'ads:ads_detail' comment.ads.id %}" class="btn btn-secondary">Cancel</a>
+    
+    <a href="{% url 'ads:ads_detail' comment.ad.id %}" class="btn btn-secondary">Cancel</a>
 </form>
 
 {% endblock %}
