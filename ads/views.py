@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, UpdateView
-from .models import Ad, Comment
+from django.views import View
+from .models import Ad, Comment, Fav
 from .owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateView, OwnerDeleteView
 from .forms import CreateForm, CommentForm
 from django.urls import reverse_lazy, reverse
@@ -11,6 +12,18 @@ from django.http import HttpResponse
 
 class AdsList(OwnerListView):
     model = Ad
+    template_name = 'ads/ad_list.html'
+
+    def get(self, request):
+        ad_list = Ad.objects.all()
+        favorites = list()
+        if request.user.is_authenticated:
+            print(request.user.favorite_ads.all())
+            rows = request.user.favorite_ads.values('id')
+            # favorites = [2, 4, ...] using list comprehension
+            favorites = [ row['id'] for row in rows ]
+        ctx = {'object_list' : ad_list, 'favorites': favorites}
+        return render(request, self.template_name, ctx)
 
 class AdDetailView(OwnerDetailView):
     model = Ad
@@ -87,7 +100,36 @@ class CommentDeleteView(OwnerDeleteView):
     def get_success_url(self):
         ad = self.object.ad
         return reverse('ads:ads_detail', args=[ad.id])
+    
+# csrf exemption in class based views
+# https://stackoverflow.com/questions/16458166/how-to-disable-djangos-csrf-validation
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from django.db.utils import IntegrityError
 
+@method_decorator(csrf_exempt, name='dispatch')
+class AddFavoriteView(LoginRequiredMixin, View):
+    def post(self, request, pk) :
+        print("Add PK",pk)
+        t = get_object_or_404(Ad, id=pk)
+        fav = Fav(user=request.user, ad=t)
+        try:
+            fav.save()  # In case of duplicate key
+        except IntegrityError as e:
+            pass
+        return HttpResponse()
+
+@method_decorator(csrf_exempt, name='dispatch')
+class DeleteFavoriteView(LoginRequiredMixin, View):
+    def post(self, request, pk) :
+        print("Delete PK",pk)
+        t = get_object_or_404(Ad, id=pk)
+        try:
+            fav = Fav.objects.get(user=request.user, ad=t).delete()
+        except Fav.DoesNotExist as e:
+            pass
+
+        return HttpResponse()
 
 def stream_file(request, pk):
     ad = get_object_or_404(Ad, id=pk)
