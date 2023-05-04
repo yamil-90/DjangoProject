@@ -31,7 +31,7 @@
         </a>
         <!-- the second href -->
         <a href="#" onclick=
-             "favPost('{% url 'ads:ad_unfavorite' ad.id %}', {{ ad.id }} );return false;"
+             "favPost('{% url 'ads:ad_favorite' ad.id %}', {{ ad.id }} );return false;"
             {% if ad.id in favorites %} style="display: none;" {% endif %}
             id="unfavorite_star_{{ad.id}}">
         <span class="fa-stack" style="vertical-align: middle;">
