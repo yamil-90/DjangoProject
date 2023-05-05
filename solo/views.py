@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
 
-class SoloList(View):
+class SoloList(LoginRequiredMixin, View):
     template_name = 'solo/index.html'
 
     def get(self, request):
