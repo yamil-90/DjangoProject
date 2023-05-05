@@ -7,6 +7,7 @@ from .owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateV
 from .forms import CreateForm, CommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponse
+from django.db.models import Q
 
 # Create your views here.
 
@@ -15,10 +16,16 @@ class AdsList(OwnerListView):
     template_name = 'ads/ad_list.html'
 
     def get(self, request):
-        ad_list = Ad.objects.all()
+
+        strval =  request.GET.get("search", False)
+        if not strval:
+            ad_list = Ad.objects.all()
+        else:
+            query = Q(title__icontains=strval)
+            query.add(Q(text__icontains=strval), Q.OR)
+            ad_list = Ad.objects.filter(query)
         favorites = list()
         if request.user.is_authenticated:
-            print(request.user.favorite_ads.all())
             rows = request.user.favorite_ads.values('id')
             # favorites = [2, 4, ...] using list comprehension
             favorites = [ row['id'] for row in rows ]
@@ -57,6 +64,9 @@ class AdCreateView(LoginRequiredMixin, CreateView):
         ad = form.save(commit=False)
         ad.owner = self.request.user
         ad.save()
+
+        # https://django-taggit.readthedocs.io/en/latest/forms.html#commit-false
+        form.save_m2m()    # Add this
         return redirect(self.success_url)
 
 class AdUpdateView(LoginRequiredMixin, UpdateView):

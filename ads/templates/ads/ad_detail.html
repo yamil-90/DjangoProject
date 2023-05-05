@@ -45,6 +45,13 @@
     <p>
         owner: {{ object.owner }}
     </p>
+    {% if object.tags.all %}
+    <p>Tags:
+        {% for tag in object.tags.all %}
+        <span style="border:1px grey solid; background-color: LightGreen;">{{ tag }}</span>
+        {% endfor %}
+    </p>
+    {% endif %}
     <a href="{% url 'ads:ads_list' %}">All ads</a>
 </div>
 <div style="width: fit-content">
