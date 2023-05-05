@@ -1,0 +1,20 @@
+{% extends "base_menu.html" %}
+
+{% block content %}
+
+<h2>this is the solo part</h2>
+{% if message %}
+    <p>the string is {{ message }}</p>
+{% endif %}
+<div>
+    <form method="post">
+        {% csrf_token %}
+        <span>Field 1</span>
+        <input type="text" name="field1" ><br>
+        <span>Field 2</span>
+        <input required type="text" name="field2" ><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+{% endblock %}

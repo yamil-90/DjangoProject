@@ -2,60 +2,56 @@
 
 {% block content %}
 
-<div>
-    <h1>Ad List</h1>
-    <ul>
-
-        {% for ad in object_list %}
-        <li>
-            <h4>
-                {% if ad.content_type %}
-                <img style="max-width: 30px;" src="{% url 'ads:ads_picture' ad.id %}"
-                    onclick="document.getElementById('overlay').style.display = 'block';">
+<div style="display: flex; flex-direction: row;">
+    <div>
+        <h1>Ad List</h1>
+        <ul>
+    
+            {% for ad in object_list %}
+            <li>
+                <h4>
+                    {% if ad.content_type %}
+                    <img style="max-width: 30px;" src="{% url 'ads:ads_picture' ad.id %}"
+                        onclick="document.getElementById('overlay').style.display = 'block';">
+                    {% endif %}
+                    <a href="{% url 'ads:ads_detail' ad.id %}">{{ad.title}}</a>
+                    {% if ad.owner == user %}
+                    (<a href="{% url 'ads:ads_update' ad.id %}">Update</a>/
+                    <a href="{% url 'ads:ads_delete' ad.id %}">Delete</a>)
+                    {% endif %}
+    
+                    {% if user.is_authenticated %}
+                    <!-- Two hrefs with two stacked icons each - one showing and one hidden -->
+                    <a href="#" onclick="favPost('{% url 'ads:ad_unfavorite' ad.id %}', {{ ad.id }} );return false;" 
+                    {% if ad.id not in favorites %} style="display: none;" {% endif %} id="favorite_star_{{ad.id}}">
+                        <span class="fa-stack" style="vertical-align: middle;">
+                            <i class="fa fa-star fa-stack-1x" style="color: orange;"></i>
+                            <i class="fa fa-star-o fa-stack-1x"></i>
+                        </span>
+                    </a>
+                    <!-- the second href -->
+                    <a href="#" onclick="favPost('{% url 'ads:ad_favorite' ad.id %}', {{ ad.id }} );return false;" 
+                    {% if ad.id in favorites %} style="display: none;" {% endif %} id="unfavorite_star_{{ad.id}}">
+                        <span class="fa-stack" style="vertical-align: middle;">
+                            <i class="fa fa-star fa-stack-1x" style="display: none; color: orange;"></i>
+                            <i class="fa fa-star-o fa-stack-1x"></i>
+                        </span>
+                    </a>
+                </h4>
                 {% endif %}
-                <a href="{% url 'ads:ads_detail' ad.id %}">{{ad.title}}</a>
-                {% if ad.owner == user %}
-                (<a href="{% url 'ads:ads_update' ad.id %}">Update</a>/
-                <a href="{% url 'ads:ads_delete' ad.id %}">Delete</a>)
-                {% endif %}
-            
-            {% if user.is_authenticated %}
-            <!-- Two hrefs with two stacked icons each - one showing and one hidden -->
-            <a href="#" onclick="favPost('{% url 'ads:ad_unfavorite' ad.id %}', {{ ad.id }} );return false;" 
-            {% if ad.id not in favorites %} 
-                style="display: none;" 
-            {% endif %} 
-            id="favorite_star_{{ad.id}}">
-                <span class="fa-stack" style="vertical-align: middle;">
-                    <i class="fa fa-star fa-stack-1x" style="color: orange;"></i>
-                    <i class="fa fa-star-o fa-stack-1x"></i>
-                </span>
-            </a>
-            <!-- the second href -->
-            <a href="#" onclick="favPost('{% url 'ads:ad_favorite' ad.id %}', {{ ad.id }} );return false;" 
-            {% if ad.id in favorites %} style="display: none;" {% endif %} 
-            id="unfavorite_star_{{ad.id}}">
-                <span class="fa-stack" style="vertical-align: middle;">
-                    <i class="fa fa-star fa-stack-1x" style="display: none; color: orange;"></i>
-                    <i class="fa fa-star-o fa-stack-1x"></i>
-                </span>
-            </a>
-        </h4>
-            {% endif %}
-        </li>
-        {% endfor %}
-    </ul>
-</div>
-<div style="float:right">
-    <!-- https://www.w3schools.com/howto/howto_css_search_button.asp -->
-    <form>
-      <input type="text" placeholder="Search.." name="search"
-      {% if search %} value="{{ search }}" {% endif %}
-      >
-      <button type="submit"><i class="fa fa-search"></i></button>
-    <a href="{% url 'ads:ads_list' %}"><i class="fa fa-undo"></i></a>
-    </form>
+            </li>
+            {% endfor %}
+        </ul>
     </div>
+    <div  style="display: flex;justify-content: center; align-items: flex-start;">
+        <!-- https://www.w3schools.com/howto/howto_css_search_button.asp -->
+        <form>
+            <input type="text" placeholder="Search.." name="search" {% if search %} value="{{ search }}" {% endif %}>
+            <button type="submit"><i class="fa fa-search"></i></button>
+            <a href="{% url 'ads:ads_list' %}"><i class="fa fa-undo"></i></a>
+        </form>
+    </div>
+</div>
 <script>
     function favPost(url, ad_id) {
         console.log('Requesting JSON');

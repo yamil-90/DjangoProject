@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'hello.apps.HelloConfig',
     'autos.apps.AutosConfig',
     'ads.apps.AdsConfig',
+    'solo.apps.SoloConfig',
 
     # Third party apps
     'django_extensions', 

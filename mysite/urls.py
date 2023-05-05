@@ -15,6 +15,7 @@ urlpatterns = [
     path('hello/', include('hello.urls')),
     path('autos/', include('autos.urls', namespace='autos')),
     path('ad/', include('ads.urls', namespace='ads')),
+    path('solo/', include('solo.urls', namespace='solo')),
     # path('__debug__/', include('debug_toolbar.urls')),
 ] 
 # + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
