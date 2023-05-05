@@ -17,5 +17,6 @@ class SoloList(LoginRequiredMixin, View):
         input1 = request.POST.get('field1').rstrip()
         input2 = request.POST.get('field2').rstrip()
         result = " ".join([input1, input2])
-        result = result[::-1].title()
+        result = result[::-1]
+        result = ' '.join(word[0].upper() + word[1:] for word in result.split())
         return render(request, self.template_name, {'message': result})
